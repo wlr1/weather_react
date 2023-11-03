@@ -1,6 +1,7 @@
 import React from "react";
 import homeGif from "./assets/video/home.gif";
 import WeatherSearch from "./containers/WeatherSearch/WeatherSearch.tsx";
+import WeatherInfo from "./containers/WeatherInfo/WeatherInfo.tsx";
 
 const App = () => {
   return (
@@ -21,7 +22,7 @@ const App = () => {
           </div>
         </div>
         <div className="bg-neutral-800 w-[1180px] h-[675px] rounded-lg shadow-2xl shadow-neutral-900 bg-opacity-90">
-          <h1 className="text-4xl text-white ">sdas</h1>
+          <WeatherInfo />
         </div>
       </div>
     </div>

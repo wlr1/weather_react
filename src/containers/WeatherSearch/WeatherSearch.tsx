@@ -6,10 +6,10 @@ const WeatherSearch = () => {
     <div className="relative m-6">
       <input
         type="text"
-        className="bg-neutral-800 rounded-lg p-3 pl-12 border-0 w-full transition-all duration-300 hover:bg-white hover:text-black focus:bg-white focus:text-black focus:outline-none focus:ring-2 focus:ring-blue-500"
-        placeholder="Search..."
+        className="bg-neutral-800 rounded-lg p-3 pl-12 border-0 w-[333px] transition-all duration-300  focus:bg-white focus:text-black focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"
+        placeholder="Enter a city..."
       />
-      <i className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white transition-all">
+      <i className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white focus:text-black transition-all">
         <BiSearchAlt />
       </i>
     </div>
