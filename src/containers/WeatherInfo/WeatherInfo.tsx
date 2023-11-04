@@ -34,17 +34,17 @@ const WeatherInfo = () => {
           {/*temp*/}
           <div className="text-white flex space-x-7 justify-center mt-5 ">
             <FaTemperatureLow size={33} />
-            <span className="">28.93°</span>
+            <span className="">28.93 C°</span>
           </div>
           {/*max temp*/}
           <div className="text-white flex space-x-7 justify-center mt-5 ">
             <FaTemperatureArrowUp size={33} />
-            <span className="">28.19°</span>
+            <span className="">28.19 C°</span>
           </div>
           {/*min temp*/}
           <div className="text-white flex space-x-7 justify-center mt-5 ">
             <FaTemperatureArrowDown size={33} />
-            <span className="">28.11°</span>
+            <span className="">28.11 C°</span>
           </div>
         </div>
         {/*Wind*/}
