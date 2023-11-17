@@ -1,7 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
+import weatherReducer from "../redux/Weather/slice.ts";
 
 const store = configureStore({
-  reducer: ff,
+  reducer: weatherReducer,
 });
 
 export type RootState = ReturnType<typeof store.getState>;

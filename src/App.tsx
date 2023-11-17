@@ -1,4 +1,3 @@
-import React from "react";
 import homeGif from "./assets/video/home.gif";
 import WeatherSearch from "./containers/WeatherSearch/WeatherSearch.tsx";
 import WeatherInfo from "./containers/WeatherInfo/WeatherInfo.tsx";

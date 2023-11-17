@@ -1,5 +1,19 @@
 interface WeatherData {
-  data: number | string;
+  weather: [
+    {
+      main: string;
+    }
+  ];
+  main: {
+    temp: number;
+    temp_min: number;
+    temp_max: number;
+  };
+  wind: {
+    speed: number;
+    deg: number;
+  };
+  name: string;
 }
 
 export interface WeatherState {
