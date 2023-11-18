@@ -3,10 +3,69 @@
 @tailwind utilities;
 
 * {
-    padding: 0;
-    margin: 0;
+  padding: 0;
+  margin: 0;
 }
 
 body {
-   overflow: hidden;
+  overflow: hidden;
+}
+
+/* WeatherInfo text */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* WeatherInfo */
+.fadeIn {
+  animation: fadeIn 4s ease-in-out;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(200%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.slideUp {
+  animation: slideUp 1s ease-in-out;
+}
+
+/* WeatherSearch */
+@keyframes slideRight {
+  from {
+    transform: translateX(-200%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.slideRight {
+  animation: slideRight 1s ease-in-out;
+}
+
+/* WeatherSearch button */
+@keyframes buttonClick {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.button-clicked {
+  animation: buttonClick 0.3s ease;
 }

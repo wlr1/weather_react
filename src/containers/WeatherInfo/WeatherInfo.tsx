@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { PiWindBold } from "react-icons/pi";
 import { WiWindDeg } from "react-icons/wi";
 import { FaTemperatureLow } from "react-icons/fa6";
@@ -18,9 +18,19 @@ import { RootState } from "../../redux/store";
 const WeatherInfo = () => {
   const weatherData = useSelector((state: RootState) => state.data);
 
+  const [animation, setAnimation] = useState(false);
+
+  useEffect(() => {
+    setAnimation(true);
+  }, []);
+
   if (!weatherData) {
     return (
-      <div className="text-white flex justify-center text-center mt-56">
+      <div
+        className={`text-white flex justify-center text-center font-bold text-2xl mt-56 ${
+          animation ? "fadeIn" : ""
+        }`}
+      >
         Enter a city into input field higher
       </div>
     );

@@ -5,10 +5,16 @@ import { fetchWeatherData } from "../../redux/Weather/asyncActions";
 
 const WeatherSearch = () => {
   const dispatch = useDispatch();
+  const [isButtonClicked, setIsButtonClicked] = useState(false);
   const [city, setCity] = useState("");
 
   const handleSearch = () => {
     dispatch(fetchWeatherData(city));
+    setIsButtonClicked(true);
+
+    setTimeout(() => {
+      setIsButtonClicked(false);
+    }, 300);
   };
 
   return (
@@ -16,15 +22,17 @@ const WeatherSearch = () => {
       <input
         type="text"
         value={city}
-        className="bg-neutral-800 rounded-l-lg p-3 pl-12 border-0 w-[333px] transition-all duration-300  focus:bg-white focus:text-black focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"
+        className="bg-neutral-800 rounded-l-lg p-3 pl-12 border-0 w-[333px] transition-all duration-300   focus:outline-none focus:ring-2 focus:ring-cobalt focus:text-white text-white"
         placeholder="Enter a city..."
         onChange={(e) => setCity(e.target.value)}
       />
       <button
         onClick={handleSearch}
-        className=" bg-neutral-800 ml-2  rounded-r-lg p-3 pl-12 border-0 w-[90px] transition-all duration-300 text-white  focus:scale-110 focus:bg-black "
+        className={`bg-neutral-800 ml-2  rounded-r-lg p-3 pl-12 border-0 w-[90px] transition-all duration-300 text-white  ${
+          isButtonClicked ? "button-clicked" : ""
+        }`}
       >
-        <span className="text-center justify-center flex align-middle mr-11">
+        <span className="text-center justify-center flex align-middle mr-11 ">
           Search
         </span>
       </button>
