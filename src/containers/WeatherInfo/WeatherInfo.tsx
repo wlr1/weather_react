@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+
 import { PiWindBold } from "react-icons/pi";
 import { WiWindDeg } from "react-icons/wi";
 import { FaTemperatureLow } from "react-icons/fa6";
@@ -18,17 +19,31 @@ import { RootState } from "../../redux/store";
 const WeatherInfo = () => {
   const weatherData = useSelector((state: RootState) => state.data);
 
-  const [animation, setAnimation] = useState(false);
+  const [key, setKey] = useState(0);
+
+  //info blocks animation
+  const [infoAnimation, setInfoAnimation] = useState(false);
+
+  //!weatherData text animation
+  const [textAnimation, setTextAnimation] = useState(false);
 
   useEffect(() => {
-    setAnimation(true);
+    setTextAnimation(true);
   }, []);
+
+  useEffect(() => {
+    setInfoAnimation(true);
+  }, [key]);
+
+  useEffect(() => {
+    setKey((prevKey) => prevKey + 1);
+  }, [weatherData]);
 
   if (!weatherData) {
     return (
       <div
         className={`text-white flex justify-center text-center font-bold text-2xl mt-56 ${
-          animation ? "fadeIn" : ""
+          textAnimation ? "fadeIn" : ""
         }`}
       >
         Enter a city into input field higher
@@ -47,12 +62,19 @@ const WeatherInfo = () => {
   const windSpeedKilometersPerHour = windSpeedMetersPerSecond * 3.6;
 
   return (
-    <div className="flex flex-col items-center justify-center ">
+    <div
+      key={key}
+      className={`flex flex-col items-center justify-center  ${
+        infoAnimation ? "fade-in-up" : ""
+      }`}
+    >
       <h1 className="text-4xl text-white text-center mt-12">{name}</h1>
 
       <div className="grid grid-cols-3 gap-20 mt-16">
         {/*Desc*/}
-        <div className="w-[232px] h-[262px] bg-black bg-opacity-50 rounded-lg transition-all delay-75 hover:scale-110">
+        <div
+          className={`w-[232px] h-[262px] bg-black bg-opacity-50 rounded-lg transition-all delay-75 hover:scale-110 `}
+        >
           <h1 className="text-white text-center font-bold mt-6">Status</h1>
           <div className=" text-white flex flex-col text-center mt-12">
             <BsCloudy size={33} className="w-full " />
@@ -60,7 +82,7 @@ const WeatherInfo = () => {
           </div>
         </div>
         {/*Temp*/}
-        <div className="w-[232px] h-[262px] bg-black bg-opacity-50 rounded-lg transition-all delay-75 hover:scale-110 ">
+        <div className="w-[232px] h-[262px] bg-black bg-opacity-50 rounded-lg transition-all delay-75 hover:scale-110">
           <h1 className="text-white text-center font-bold mt-6">Temperature</h1>
 
           {/*temp*/}
@@ -80,7 +102,11 @@ const WeatherInfo = () => {
           </div>
         </div>
         {/*Wind*/}
-        <div className="w-[232px] h-[262px] bg-black bg-opacity-50 rounded-lg transition-all delay-75 hover:scale-110">
+        <div
+          className={`w-[232px] h-[262px] bg-black bg-opacity-50 rounded-lg transition-all delay-75 hover:scale-110 ${
+            infoAnimation ? "fade-in-up" : ""
+          }`}
+        >
           <h1 className="text-white text-center font-bold mt-6 ">Wind</h1>
           <div className="text-white flex space-x-7 justify-center mt-5">
             <PiWindBold size={33} />
