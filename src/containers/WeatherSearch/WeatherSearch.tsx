@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { ReactEventHandler, useState } from "react";
 import { BiSearchAlt } from "react-icons/bi";
 import { useDispatch } from "react-redux";
 import { fetchWeatherData } from "../../redux/Weather/asyncActions";
@@ -8,13 +8,21 @@ const WeatherSearch = () => {
   const [isButtonClicked, setIsButtonClicked] = useState(false);
   const [city, setCity] = useState("");
 
-  const handleSearch = () => {
+  //some errors?
+  const handleSearch = (e) => {
     dispatch(fetchWeatherData(city));
     setIsButtonClicked(true);
 
     setTimeout(() => {
       setIsButtonClicked(false);
     }, 300);
+  };
+
+  //some errors?
+  const handleKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
   };
 
   return (
@@ -25,6 +33,7 @@ const WeatherSearch = () => {
         className="bg-neutral-800 rounded-l-lg p-3 pl-12 border-0 w-[333px] transition-all duration-300   focus:outline-none focus:ring-2 focus:ring-cobalt focus:text-white text-white"
         placeholder="Enter a city..."
         onChange={(e) => setCity(e.target.value)}
+        onKeyDown={handleKeyPress}
       />
       <button
         onClick={handleSearch}
