@@ -1,24 +1,60 @@
 import homeGif from "./assets/video/home.gif";
+import cloudyGif from "./assets/video/cloudy.gif";
+import rainGif from "./assets/video/rain.gif";
+import snowGif from "./assets/video/snow.gif";
+import mistGif from "./assets/video/mist.gif";
+import clearGif from "./assets/video/clear.gif";
+import drizzleGif from "./assets/video/drizzle.gif";
+
 import WeatherSearch from "./containers/WeatherSearch/WeatherSearch.tsx";
 import WeatherInfo from "./containers/WeatherInfo/WeatherInfo.tsx";
+
 import { useEffect, useState } from "react";
 
 const App = () => {
   const [containerAnimation, setContainerAnimation] = useState(false);
+  const [backgroundImage, setBackgroundImage] = useState(homeGif);
 
   useEffect(() => {
     setContainerAnimation(true);
   }, []);
 
+  const handleWeatherChange = (WeatherMain: string) => {
+    switch (WeatherMain) {
+      case "Clouds":
+        setBackgroundImage(cloudyGif);
+        break;
+      case "Rain":
+        setBackgroundImage(rainGif);
+        break;
+      case "Snow":
+        setBackgroundImage(snowGif);
+        break;
+      case "Mist":
+        setBackgroundImage(mistGif);
+        break;
+      case "Clear":
+        setBackgroundImage(clearGif);
+        break;
+      case "Drizzle":
+        setBackgroundImage(drizzleGif);
+        break;
+      default:
+        setBackgroundImage(homeGif);
+        break;
+    }
+  };
+
   return (
     <div
       style={{
-        backgroundImage: "url(" + homeGif + ")",
+        backgroundImage: `url(${backgroundImage})`,
         backgroundSize: "cover",
         height: "100vh",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
+        transition: "background-image 0.5s ease",
       }}
     >
       <div className="grid space-y-3 ">
@@ -36,7 +72,7 @@ const App = () => {
             containerAnimation ? "slideUp" : ""
           }`}
         >
-          <WeatherInfo />
+          <WeatherInfo onWeatherChange={handleWeatherChange} />
         </div>
       </div>
     </div>

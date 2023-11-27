@@ -6,15 +6,21 @@ import { FaTemperatureLow } from "react-icons/fa6";
 import { FaTemperatureArrowDown } from "react-icons/fa6";
 import { FaTemperatureArrowUp } from "react-icons/fa6";
 
-import { BsCloudy } from "react-icons/bs"; //clear sky
+import { BsCloudy } from "react-icons/bs";
 import { BsFillCloudRainFill } from "react-icons/bs"; //rain
 import { BsSnow } from "react-icons/bs"; //snow
 import { TbMist } from "react-icons/tb"; //mist
+import { BsSun } from "react-icons/bs"; //clear sky
+import { BsCloudDrizzleFill } from "react-icons/bs"; //drizzle
 
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 
-const WeatherInfo = () => {
+interface WeatherInfoProps {
+  onWeatherChange: (newWeather: string) => void;
+}
+
+const WeatherInfo: React.FC<WeatherInfoProps> = ({ onWeatherChange }) => {
   const weatherData = useSelector((state: RootState) => state.data);
 
   const [key, setKey] = useState(0);
@@ -36,6 +42,13 @@ const WeatherInfo = () => {
   useEffect(() => {
     setKey((prevKey) => prevKey + 1);
   }, [weatherData]);
+
+  useEffect(() => {
+    if (weatherData) {
+      const mainWeather = weatherData.weather[0]?.main;
+      onWeatherChange(mainWeather);
+    }
+  }, [weatherData, onWeatherChange]);
 
   if (!weatherData) {
     return (
@@ -65,6 +78,8 @@ const WeatherInfo = () => {
     Rain: <BsFillCloudRainFill size={33} className="w-full" />,
     Mist: <TbMist size={33} className="w-full" />,
     Snow: <BsSnow size={33} className="w-full" />,
+    Clear: <BsSun size={33} className="w-full" />,
+    Drizzle: <BsCloudDrizzleFill size={33} className="w-full" />,
   };
 
   const selectedIcon = iconMapping[WeatherMain] || iconMapping[0];
