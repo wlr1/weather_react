@@ -6,15 +6,13 @@ import { FaTemperatureLow } from "react-icons/fa6";
 import { FaTemperatureArrowDown } from "react-icons/fa6";
 import { FaTemperatureArrowUp } from "react-icons/fa6";
 
-import { BsCloudy } from "react-icons/bs";
+import { BsCloudy } from "react-icons/bs"; //clear sky
+import { BsFillCloudRainFill } from "react-icons/bs"; //rain
+import { BsSnow } from "react-icons/bs"; //snow
+import { TbMist } from "react-icons/tb"; //mist
+
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
-// import { BsFillCloudDrizzleFill } from "react-icons/bs";
-// import { BsFillCloudFog2Fill } from "react-icons/bs";
-// import { BsFillCloudLightningRainFill } from "react-icons/bs";
-// import { BsFillCloudSnowFill } from "react-icons/bs";
-// import { BsFillCloudSunFill } from "react-icons/bs";
-// import { BsCloudSun } from "react-icons/bs";
 
 const WeatherInfo = () => {
   const weatherData = useSelector((state: RootState) => state.data);
@@ -52,7 +50,7 @@ const WeatherInfo = () => {
   }
 
   const {
-    weather: [{ main: WeatherMain }],
+    weather: [{ main: WeatherMain, description: WeatherDescription }],
     main: { temp, temp_min, temp_max },
     wind: { speed, deg },
     name,
@@ -60,6 +58,16 @@ const WeatherInfo = () => {
 
   const windSpeedMetersPerSecond = speed;
   const windSpeedKilometersPerHour = windSpeedMetersPerSecond * 3.6;
+
+  //displays icon for weatherMain status
+  const iconMapping: Record<string, JSX.Element> = {
+    Clouds: <BsCloudy size={33} className="w-full" />,
+    Rain: <BsFillCloudRainFill size={33} className="w-full" />,
+    Mist: <TbMist size={33} className="w-full" />,
+    Snow: <BsSnow size={33} className="w-full" />,
+  };
+
+  const selectedIcon = iconMapping[WeatherMain] || iconMapping[0];
 
   return (
     <div
@@ -77,8 +85,11 @@ const WeatherInfo = () => {
         >
           <h1 className="text-white text-center font-bold mt-6">Status</h1>
           <div className=" text-white flex flex-col text-center mt-12">
-            <BsCloudy size={33} className="w-full " />
-            <span className="mt-2">{WeatherMain}</span>
+            {selectedIcon}
+            <span className="mt-2 font-bold">{WeatherMain}</span>
+            <span className="mt-2 text-sm font-semibold text-neutral-400">
+              {WeatherDescription}
+            </span>
           </div>
         </div>
         {/*Temp*/}

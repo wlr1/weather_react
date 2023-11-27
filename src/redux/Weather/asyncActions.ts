@@ -23,3 +23,5 @@ export const fetchWeatherData = createAsyncThunk(
   }
 );
 //https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}
+
+//https://openweathermap.org/weather-conditions
